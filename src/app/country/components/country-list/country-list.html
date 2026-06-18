@@ -1,0 +1,44 @@
+<section class="mt-5">
+
+  <div class="overflow-x-auto">
+  <table class="table table-zebra">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Icon</th>
+        <th>Flag</th>
+        <th>Country</th>
+        <th>Capital</th>
+        <th>Population</th>
+        <th>More</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      @if ( countryList().length == 0 ) {
+
+        <tr>
+          <td colspan="7" > No data </td>
+        </tr>
+
+      }
+
+      <!-- @for (country of countryList(); track $index) {
+        <tr>
+          <th> {{$index + 1}} </th>
+          <td> {{ country.icon }} </td>
+          <td> {{ country.flag }} </td>
+          <td> {{ country.name }} </td>
+          <td> {{ country.capital }} </td>
+          <td> {{ country.population }} </td>
+          <td> {{ country.link }} </td>
+        </tr>
+
+      } -->
+
+    </tbody>
+  </table>
+</div>
+
+</section>
