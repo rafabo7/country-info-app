@@ -44,3 +44,6 @@ __screenshots__/
 Thumbs.db
 
 notas.md
+
+src/environments/environment.development.ts
+src/environments/environment.ts
