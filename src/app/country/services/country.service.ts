@@ -16,18 +16,36 @@ export class CountryService {
     query = query.toLowerCase()
 
 
-    return this.http.get<RESTCountriesResponse>(`${environment.countriesUrl}/capitals?q=${query}`, {
-      headers: {
-        'Authorization': `Bearer ${environment.countriesApiKey}`
-      }
-    }).pipe(
-      map(res => CountryMapper.restCountriesMapper(res.data.objects)),
-      catchError(error => {
-        console.log('RestCountries API error:', error)
-        // review this deprecated throwError
-        return throwError((error: Error) => new Error('RestCountries API error', error))
-      })
-    )
+    return this.http.get<RESTCountriesResponse>(`${environment.countriesUrl}/capitals?q=${query}`,
+      {
+        headers: {
+          'Authorization': `Bearer ${environment.countriesApiKey}`
+        }
+      }).pipe(
+        map(res => CountryMapper.restCountriesMapper(res.data.objects)),
+        catchError(error => {
+          console.log('RestCountries API error:', error)
+          // review this deprecated throwError
+          return throwError((error: Error) => new Error('RestCountries API error', error))
+        })
+      )
+  }
+
+  searchByCountryName(query: string) {
+    query.toLocaleLowerCase()
+    return this.http.get<RESTCountriesResponse>(`${environment.countriesUrl}/names.common?q=${query}`,
+      {
+        headers: {
+          'Authorization': `Bearer ${environment.countriesApiKey}`
+        }
+      }).pipe(
+        map(res => CountryMapper.restCountriesMapper(res.data.objects)),
+        catchError(error => {
+          console.log('RestCountries API error:', error)
+          // review this deprecated throwError
+          return throwError((error: Error) => new Error('RestCountries API error', error))
+        })
+      )
   }
 
 }
