@@ -1,4 +1,6 @@
 import { Component, input } from '@angular/core';
+import { RESTCountriesResponse, RestCountry } from '../../interfaces/Rest-countries-response.interface';
+import { Country } from '../../interfaces/country.interface';
 
 @Component({
   selector: 'country-list',
@@ -7,5 +9,5 @@ import { Component, input } from '@angular/core';
 })
 export class CountryList {
 
-  countryList = input([])
+  countryList = input<Country[]>([])
 }

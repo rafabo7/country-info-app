@@ -24,18 +24,18 @@
 
       }
 
-      <!-- @for (country of countryList(); track $index) {
+      @for (country of countryList(); track country.ccn3) {
         <tr>
           <th> {{$index + 1}} </th>
           <td> {{ country.icon }} </td>
-          <td> {{ country.flag }} </td>
+          <td> <img class="w-12" [src]="country.flag" [alt]="`${country.name}'s flag png`"> </td>
           <td> {{ country.name }} </td>
-          <td> {{ country.capital }} </td>
+          <td> {{ country.capital.name }} </td>
           <td> {{ country.population }} </td>
-          <td> {{ country.link }} </td>
+          <td> <a href="" class="link-primary cursor-pointer font-bold">More</a> </td>
         </tr>
 
-      } -->
+      }
 
     </tbody>
   </table>
