@@ -19,7 +19,7 @@
       @if ( countryList().length == 0 ) {
 
         <tr>
-          <td colspan="7" > No data </td>
+          <td colspan="7" class="text-center" > No results were found </td>
         </tr>
 
       }
@@ -31,7 +31,7 @@
           <td> <img class="w-12" [src]="country.flag" [alt]="`${country.name}'s flag png`"> </td>
           <td> {{ country.name }} </td>
           <td> {{ country.capital.name }} </td>
-          <td> {{ country.population }} </td>
+          <td> <span class="badge badge-dash">{{ country.population | number }}</span> </td>
           <td> <a href="" class="link-primary cursor-pointer font-bold">More</a> </td>
         </tr>
 
