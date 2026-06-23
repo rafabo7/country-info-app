@@ -16,25 +16,47 @@
     </thead>
     <tbody>
 
-      @if ( countryList().length == 0 ) {
+      @if ( countryList()) {
 
-        <tr>
-          <td colspan="7" class="text-center" > No results were found </td>
-        </tr>
+        @for (country of countryList(); track country.ccn3) {
+          <tr>
+            <th> {{$index + 1}} </th>
+            <td> {{ country.icon }} </td>
+            <td> <img class="w-12" [src]="country.flag" [alt]="`${country.name}'s flag png`"> </td>
+            <td> {{ country.name }} </td>
+            <td> {{ country.capital.name }} </td>
+            <td> <span class="badge badge-dash">{{ country.population | number }}</span> </td>
+            <td> <a href="" class="link-primary cursor-pointer font-bold">More</a> </td>
+          </tr>
+
+        }
 
       }
 
-      @for (country of countryList(); track country.ccn3) {
+      @if (errorMessage()) {
         <tr>
-          <th> {{$index + 1}} </th>
-          <td> {{ country.icon }} </td>
-          <td> <img class="w-12" [src]="country.flag" [alt]="`${country.name}'s flag png`"> </td>
-          <td> {{ country.name }} </td>
-          <td> {{ country.capital.name }} </td>
-          <td> <span class="badge badge-dash">{{ country.population | number }}</span> </td>
-          <td> <a href="" class="link-primary cursor-pointer font-bold">More</a> </td>
+          <td colspan="7" class="text-center">
+            {{ errorMessage() }}
+          </td>
         </tr>
+      }
+      <!--  -->
+      @if (countryList().length === 0 && !isLoading() ) {
+        <tr>
+          <td colspan="7" class="text-center">
+            No results were found
+          </td>
+        </tr>
+      }
 
+      <!--  -->
+
+      @if ( isLoading() ) {
+        <tr>
+          <td colspan="7" class="text-center">
+            Searching...
+          </td>
+        </tr>
       }
 
     </tbody>

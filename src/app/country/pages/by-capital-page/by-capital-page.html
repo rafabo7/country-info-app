@@ -3,11 +3,12 @@
   (query)="query.set($event)"
   />
 
-@if (countryResource.error()) {
-<!-- This will not appear. Restcountries v5 returns empty array instead of 404 error -->
-  <h3> {{ countryResource.error() }} </h3>
-}
-@if ( countryResource.hasValue() ) {
-  <country-list [countryList]="countryResource.value()" />
 
-}
+  <country-list
+    [countryList]="countryResource.value() ?? []"
+    [errorMessage]="countryResource.error()"
+    [isEmpty]="countryResource.value()?.length === 0"
+    [isLoading]="countryResource.isLoading()"
+  />
+
+
