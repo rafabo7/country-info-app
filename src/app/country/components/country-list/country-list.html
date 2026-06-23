@@ -26,7 +26,7 @@
             <td> {{ country.name }} </td>
             <td> {{ country.capital.name }} </td>
             <td> <span class="badge badge-dash">{{ country.population | number }}</span> </td>
-            <td> <a href="" class="link-primary cursor-pointer font-bold">More</a> </td>
+            <td> <a [routerLink]="`/country/by/${country.alphaCode}`" class="link-primary cursor-pointer font-bold">More</a> </td>
           </tr>
 
         }
