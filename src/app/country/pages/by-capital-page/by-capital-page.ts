@@ -4,7 +4,8 @@ import { CountryList } from "../../components/country-list/country-list";
 import { CountryService } from '../../services/country.service';
 import { RestCountry, RESTCountriesResponse } from '../../interfaces/Rest-countries-response.interface';
 import { Country } from '../../interfaces/country.interface';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, of } from 'rxjs';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-by-capital-page',
@@ -16,12 +17,12 @@ export class ByCapitalPage {
   countryService = inject(CountryService)
   query = signal('')
 
-  countryResource = resource({
+  countryResource = rxResource({
     params: () => ({ query: this.query() }),
-    loader: async ({ params }) => {
-      if (!params.query) return []
+    stream:  ({ params }) => {
+      if (!params.query) return of([])
 
-      return await firstValueFrom(this.countryService.searchByCapital(params.query))
+      return this.countryService.searchByCapital(params.query)
     }
   })
 
