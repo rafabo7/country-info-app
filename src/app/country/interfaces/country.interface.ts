@@ -1,4 +1,5 @@
 export interface Country {
+  alphaCode: string
   areaKm: number,
   capital: Capital
   ccn3: string,

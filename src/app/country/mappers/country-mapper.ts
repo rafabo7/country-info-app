@@ -5,6 +5,7 @@ export class CountryMapper {
   static restCountryToCountry(restCountry: RestCountry): Country {
 
     return {
+      alphaCode: restCountry.codes.alpha_3,
       areaKm: restCountry.area.kilometers,
       capital: {
         name: restCountry.capitals[0].name,
