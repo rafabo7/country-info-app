@@ -48,4 +48,22 @@ export class CountryService {
       )
   }
 
+  searchByAlphaCode(query: string) {
+    query.toLocaleLowerCase()
+    return this.http.get<RESTCountriesResponse>(`${environment.countriesUrl}/codes.alpha_3?q=${query}`,
+      {
+        headers: {
+          'Authorization': `Bearer ${environment.countriesApiKey}`
+        }
+      }).pipe(
+        map(res => CountryMapper.restCountriesMapper(res.data.objects)),
+        map( countries => countries.at(0) ),
+        catchError(error => {
+          console.log(`No se encontró un pais con código ${query}`, error)
+          // review this deprecated throwError
+          return throwError((error: Error) => new Error('RestCountries API error', error))
+        })
+      )
+  }
+
 }
