@@ -22,7 +22,7 @@
           <tr>
             <th> {{$index + 1}} </th>
             <td> {{ country.icon }} </td>
-            <td> <img class="w-12" [src]="country.flag" [alt]="`${country.name}'s flag png`"> </td>
+            <td> <img class="w-12" [src]="country.flag.flagUrl" [alt]="`${country.name}'s flag png`"> </td>
             <td> {{ country.name }} </td>
             <td> {{ country.capital.name }} </td>
             <td> <span class="badge badge-dash">{{ country.population | number }}</span> </td>
