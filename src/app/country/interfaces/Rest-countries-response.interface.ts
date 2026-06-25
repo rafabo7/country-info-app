@@ -213,17 +213,14 @@ export interface Names {
   common:       string;
   native:       Native;
   official:     string;
-  translations: { [key: string]: Ara };
+  translations: { [key: string]: NativeNames };
 }
 
 export interface Native {
-  spa?: Ara;
-  eng?: Ara;
-  ita?: Ara;
-  ara?: Ara;
+  [key: string]: NativeNames;
 }
 
-export interface Ara {
+export interface NativeNames {
   common:   string;
   official: string;
 }

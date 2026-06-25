@@ -3,10 +3,16 @@ import { RestCountry } from "../interfaces/Rest-countries-response.interface";
 
 export class CountryMapper {
   static restCountryToCountry(restCountry: RestCountry): Country {
+    // get 3 letter official language code
+    const firstLanguage = restCountry.languages[0].iso639_3
 
     return {
       alphaCode: restCountry.codes.alpha_3,
-      areaKm: restCountry.area.kilometers,
+      geoInfo: {
+        mainCoordinates: restCountry.coordinates,
+        areaKm: restCountry.area.kilometers,
+        landlocked: restCountry.landlocked
+      },
       capital: {
         name: restCountry.capitals[0].name,
         coordinates: {
@@ -15,10 +21,22 @@ export class CountryMapper {
         }
       },
       ccn3: restCountry.codes.ccn3,
-      flag: restCountry.flag.url_png,
+      flag: {
+        flagUrl: restCountry.flag.url_png,
+        flagDescription: restCountry.flag.description
+      },
+      goverment: restCountry.government_type,
       icon: restCountry.flag.emoji,
-      name: restCountry.names.translations['spa'].common ?? restCountry.names.common,
-      population: restCountry.population
+      languages: restCountry.languages.map( item => item.name),
+      name: restCountry.names.common,
+      nameOfficial: restCountry.names.official,
+      nativeName: {
+        nativeCommon: restCountry.names.native[firstLanguage].common,
+        nativeOfficial: restCountry.names.native[firstLanguage].official
+      },
+      population: restCountry.population,
+      region: restCountry.region,
+      subregion: restCountry.subregion,
     }
 
   }
