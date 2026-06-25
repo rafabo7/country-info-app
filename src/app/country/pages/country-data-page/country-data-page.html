@@ -1,5 +1,21 @@
-
-
 <h1> {{countryCode}} </h1>
 
 <h2> {{ countryResource.value()?.name }} </h2>
+
+<!-- Error check -->
+
+@if (countryResource.isLoading()) {
+<app-loading-msg />
+
+}
+
+@if (countryResource.error()) {
+<app-error-msg message="Error retrieving country data" />
+
+}
+
+<!-- No result check -->
+
+@if (!countryResource.hasValue() && !countryResource.isLoading()) {
+<app-error-msg message="Country not found" />
+}

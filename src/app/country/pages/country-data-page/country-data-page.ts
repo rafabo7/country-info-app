@@ -2,10 +2,12 @@ import { CountryService } from './../../services/country.service';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
+import { ErrorMsg } from '../../../shared/components/error-msg/error-msg';
+import { LoadingMsg } from "../../../shared/components/loading-msg/loading-msg";
 
 @Component({
   selector: 'app-country-data-page',
-  imports: [],
+  imports: [ErrorMsg, LoadingMsg],
   templateUrl: './country-data-page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
