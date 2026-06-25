@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Location } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 
 @Component({
   selector: 'app-error-msg',
@@ -8,4 +9,9 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 })
 export class ErrorMsg {
   message = input.required()
+  location = inject(Location)
+
+  goBack() {
+    this.location.back()
+  }
 }
