@@ -1,3 +1,5 @@
+import { LatLngLiteral } from "leaflet"
+
 export interface Country {
   alphaCode: string
   geoInfo: GeoInfo,
@@ -20,10 +22,7 @@ interface Capital {
   coordinates: Coordinates
 }
 
-interface Coordinates {
-  lat: number,
-  lng: number
-}
+export type Coordinates = LatLngLiteral
 
 interface NativeName {
   nativeCommon: string,
