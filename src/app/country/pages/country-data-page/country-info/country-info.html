@@ -1,0 +1,56 @@
+<!-- <h1 class="text-primary font-bold text-2xl" >{{country().name}} - {{country().nameOfficial}} - {{country().alphaCode}}</h1>
+<p> {{ country().capital.name }} </p>
+<p> {{ country().geoInfo.areaKm| number }} </p> -->
+
+
+<div class="stats stats-vertical lg:stats-horizontal shadow grid grid-cols-[1fr_2fr_2fr]">
+  <div class="stat flex flex-col justify-start gap-2 p-4">
+    <div class="stat-value"> {{country().name}} </div>
+    <div class="italic font-bold text-xl "> {{country().nameOfficial}} </div>
+    <div class="stat-desc text-xl"> Native names</div>
+    <div class="stat-value text-xl text-wrap"> {{country().nativeName.nativeCommon}} - {{country().nativeName.nativeOfficial}}</div>
+  </div>
+
+  <div class="stat flex flex-col justify-start gap-2 p-4">
+    <div class="text-xl stat-desc"> Goverment </div>
+    <div class="text-2xl"> {{country().goverment}} </div>
+    <div class="text-xl stat-desc"> Capital </div>
+    <div class="text-2xl"> {{country().capital.name}} </div>
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-value"> Flag </div>
+    <div class="flex flex-col lg:flex-row gap-4 lg:items-center "> <img class="w-45 shadow rounded-xl" src="{{country().flag.flagUrl}}" alt=""> <p>{{country().flag.flagDescription}}</p> </div>
+  </div>
+
+
+
+</div>
+
+<div class="divider divider-neutral"></div>
+
+<div class="stats stats-vertical lg:stats-horizontal shadow grid grid-cols-[repeat(5,1fr)]">
+  <div class="stat">
+    <div class="stat-value"> {{country().population | number}} </div>
+    <div class="italic font-bold"> Population </div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-value"> {{country().geoInfo.areaKm| number}} km<sup>2</sup> </div>
+    <div class="italic font-bold"> Area </div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-value"> {{ country().population / country().geoInfo.areaKm | number}} hab. km<sup>2</sup> </div>
+    <div class="italic font-bold"> Population density </div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-desc text-2xl"> Official languages </div>
+    <div class="text-xl font-bold"> {{ country().languages.join(', ') }} </div>
+  </div>
+</div>
+<div class="divider divider-neutral"></div>
+

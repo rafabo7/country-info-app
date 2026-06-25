@@ -1,7 +1,3 @@
-<h1> {{countryCode}} </h1>
-
-<h2> {{ countryResource.value()?.name }} </h2>
-
 <!-- Error check -->
 
 @if (countryResource.isLoading()) {
@@ -18,4 +14,8 @@
 
 @if (!countryResource.hasValue() && !countryResource.isLoading()) {
 <app-error-msg message="Country not found" />
+}
+
+@if (countryResource.hasValue()) {
+<country-info [country]="countryResource.value()" />
 }

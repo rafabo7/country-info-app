@@ -4,10 +4,11 @@ import { rxResource } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { ErrorMsg } from '../../../shared/components/error-msg/error-msg';
 import { LoadingMsg } from "../../../shared/components/loading-msg/loading-msg";
+import { CountryInfo } from "./country-info/country-info";
 
 @Component({
   selector: 'app-country-data-page',
-  imports: [ErrorMsg, LoadingMsg],
+  imports: [ErrorMsg, LoadingMsg, CountryInfo],
   templateUrl: './country-data-page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
