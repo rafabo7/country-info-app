@@ -2,7 +2,37 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.11.
 
+This is a learning project created to practice beginner to intermediate Angular concepts.
+
+## Features
+- Data fetching using the free-tier RestCountries API
+- ETL process to adapt API responses to the application's needs
+- Searching by capital or by country name.
+- Navigation to country detail page.
+- Integration with the **Leaflet** library to display an interactive map on the country details page.
+- To be continued...
+
+
 ## Development server
+
+Due to RestCountries API usage policy this version of the app is not fully functional in production. An API Gateway service is currently under development to manage HTTP requests and data storage for this and other projects of mine to be deployed safely in production.
+Until then, you can clone this repository and run the application locally using your own RestCountries API credentials.
+
+```bash
+# Install dependencies
+npm install
+
+# Generate environment files
+ng generate environments
+```
+Copy the content of `src/environments/environment.example.ts` to `environment.ts` and `environment.development.ts` and provide your own API key.
+
+```js
+export const environment = {
+  countriesApiKey: 'Your api key',
+  countriesUrl: 'https://api.restcountries.com/countries/v5'
+};
+```
 
 To start a local development server, run:
 
@@ -10,50 +40,3 @@ To start a local development server, run:
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
