@@ -2,6 +2,21 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, input } from '@angul
 import * as L from 'leaflet';
 import { Coordinates } from '../../../country/interfaces/Rest-countries-response.interface';
 
+const iconRetinaUrl = 'assets/marker-icon-2x.png';
+const iconUrl = 'assets/marker-icon.png';
+const shadowUrl = 'assets/marker-shadow.png';
+const iconDefault = L.icon({
+  iconRetinaUrl,
+  iconUrl,
+  shadowUrl,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  tooltipAnchor: [16, -28],
+  shadowSize: [41, 41]
+});
+L.Marker.prototype.options.icon = iconDefault;
+
 @Component({
   selector: 'app-map',
   styles: `
@@ -41,17 +56,13 @@ export class AppMap implements AfterViewInit {
       minZoom: 3,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
-
     tiles.addTo(this.map);
-
   }
-
-  constructor(){}
 
   ngAfterViewInit(): void {
     this.initMap()
+    const marker = L.marker(this.capitalCoordinates())
+    marker.addTo(this.map)
 
   }
-
-// [ 39.8282, -98.5795 ]
 }
