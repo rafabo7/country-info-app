@@ -19,22 +19,7 @@ L.Marker.prototype.options.icon = iconDefault;
 
 @Component({
   selector: 'app-map',
-  styles: `
-    .map-container {
-
-      margin-top: 30px;
-      width: 66%;
-      padding: 16px
-    }
-
-    .map-frame {
-        border: 2px solid black;
-        height: 100%;
-      }
-
-    #map {
-        height: 400px;
-    }`,
+  styleUrl: './map.css' ,
   imports: [],
   templateUrl: './map.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -48,7 +33,7 @@ export class AppMap implements AfterViewInit {
   private initMap() {
     this.map = L.map('map', {
       center: this.capitalCoordinates(),
-      zoom: 5
+      zoom: 6
     });
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
