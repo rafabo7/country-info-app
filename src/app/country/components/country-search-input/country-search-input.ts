@@ -1,5 +1,4 @@
-import { Component, input, output } from '@angular/core';
-import countryRoutes from '../../country.routes';
+import { Component, effect, input, output, signal } from '@angular/core';
 
 @Component({
   selector: 'country-search-input',
@@ -12,9 +11,14 @@ export class CountrySearchInput {
 
   placeholder = input('Buscar...')
 
-  // onSearch(value: string) {
-  // validacion
-  //   this.query.emit(value)
-  // }
+  inputValue = signal<string>('')
 
+  debounceEffect = effect( (onCleanup) => {
+    const value = this.inputValue()
+    const timeout = setTimeout(() => {
+      this.query.emit(value)
+    }, 500);
+
+    onCleanup(() => {clearTimeout(timeout)})
+  })
 }
