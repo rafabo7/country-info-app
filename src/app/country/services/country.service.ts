@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { RestCountry, RESTCountriesResponse } from '../interfaces/Rest-countries-response.interface';
-import { catchError, map, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { CountryMapper } from '../mappers/country-mapper';
+import { Country } from '../interfaces/country.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +13,8 @@ export class CountryService {
 
   private http = inject(HttpClient)
 
-  searchByCapital(query: string) {
+  searchByCapital(query: string): Observable<Country[]> {
     query = query.toLowerCase()
-
 
     return this.http.get<RESTCountriesResponse>(`${environment.countriesUrl}/capitals?q=${query}`,
       {
@@ -31,7 +31,7 @@ export class CountryService {
       )
   }
 
-  searchByCountryName(query: string) {
+  searchByCountryName(query: string): Observable<Country[]> {
     query.toLocaleLowerCase()
     return this.http.get<RESTCountriesResponse>(`${environment.countriesUrl}/names.common?q=${query}`,
       {
