@@ -5,6 +5,7 @@ import { RestCountry, RESTCountriesResponse } from '../interfaces/Rest-countries
 import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 import { CountryMapper } from '../mappers/country-mapper';
 import { Country } from '../interfaces/country.interface';
+import { Region } from '../interfaces/region.type';
 
 @Injectable({
   providedIn: 'root',
@@ -15,12 +16,13 @@ export class CountryService {
 
   private queryCacheCapital = new Map<string, Country[]>()
   private queryCacheCountry = new Map<string, Country[]>()
+  private queryCacheRegion = new Map<Region, Country[]>()
 
   searchByCapital(query: string): Observable<Country[]> {
     query = query.toLowerCase()
 
     if (this.queryCacheCapital.has(query)) {
-      return of( this.queryCacheCapital.get(query)! )
+      return of(this.queryCacheCapital.get(query)!)
     }
 
     return this.http.get<RESTCountriesResponse>(`${environment.countriesUrl}/capitals?q=${query}`,
@@ -45,7 +47,7 @@ export class CountryService {
     query = query.toLowerCase()
 
     if (this.queryCacheCountry.has(query)) {
-      return of( this.queryCacheCountry.get(query)! )
+      return of(this.queryCacheCountry.get(query)!)
     }
 
     return this.http.get<RESTCountriesResponse>(`${environment.countriesUrl}/names.common?q=${query}`,
@@ -73,9 +75,33 @@ export class CountryService {
         }
       }).pipe(
         map(res => CountryMapper.restCountriesMapper(res.data.objects)),
-        map( countries => countries.at(0) ),
+        map(countries => countries.at(0)),
         catchError(error => {
           console.log(`No se encontró un pais con código ${query}`, error)
+          // review this deprecated throwError
+          return throwError((error: Error) => new Error('RestCountries API error', error))
+        })
+      )
+  }
+
+  searchByRegion(region: Region ) {
+    region.toLocaleLowerCase()
+
+
+    if (this.queryCacheRegion.has(region)) {
+      return of(this.queryCacheRegion.get(region)!)
+    }
+
+    return this.http.get<RESTCountriesResponse>(`${environment.countriesUrl}/region?q=${region}`,
+      {
+       headers: {
+          'Authorization': `Bearer ${environment.countriesApiKey}`
+        },
+      }).pipe(
+        map(res => CountryMapper.restCountriesMapper(res.data.objects)),
+        tap(countries => this.queryCacheRegion.set(region, countries)),
+        catchError(error => {
+          console.log('RestCountries API error:', error)
           // review this deprecated throwError
           return throwError((error: Error) => new Error('RestCountries API error', error))
         })
