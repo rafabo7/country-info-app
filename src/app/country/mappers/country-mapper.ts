@@ -4,7 +4,7 @@ import { RestCountry } from "../interfaces/Rest-countries-response.interface";
 export class CountryMapper {
   static restCountryToCountry(restCountry: RestCountry): Country {
     // get 3 letter official language code
-    const firstLanguage = restCountry.languages[0].iso639_3
+    const firstNative = Object.keys(restCountry.names.native)[0]
 
     return {
       alphaCode: restCountry.codes.alpha_3,
@@ -14,10 +14,10 @@ export class CountryMapper {
         landlocked: restCountry.landlocked
       },
       capital: {
-        name: restCountry.capitals[0].name,
+        name: restCountry.capitals[0]?.name,
         coordinates: {
-          lat: restCountry.capitals[0].coordinates.lat,
-          lng: restCountry.capitals[0].coordinates.lng
+          lat: restCountry.capitals[0]?.coordinates.lat,
+          lng: restCountry.capitals[0]?.coordinates.lng
         }
       },
       ccn3: restCountry.codes.ccn3,
@@ -31,8 +31,8 @@ export class CountryMapper {
       name: restCountry.names.common,
       nameOfficial: restCountry.names.official,
       nativeName: {
-        nativeCommon: restCountry.names.native[firstLanguage].common,
-        nativeOfficial: restCountry.names.native[firstLanguage].official
+        nativeCommon: restCountry.names.native[firstNative]?.common,
+        nativeOfficial: restCountry.names.native[firstNative]?.official
       },
       population: restCountry.population,
       region: restCountry.region,
