@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, linkedSignal, signal } from '@angular/core';
 import { CountrySearchInput } from "../../components/country-search-input/country-search-input";
 import { CountryList } from "../../components/country-list/country-list";
 import { CountryService } from '../../services/country.service';
@@ -20,7 +20,7 @@ export class ByCapitalPage {
   router = inject(Router)
   queryParam = this.activatedRoute.snapshot.queryParamMap.get('query') ?? ''
 
-  query = signal(this.queryParam)
+  query = linkedSignal(() => this.queryParam)
 
   countryResource = rxResource({
     params: () => ({ query: this.query() }),
